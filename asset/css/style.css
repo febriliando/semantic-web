@@ -15,6 +15,52 @@
   padding: 100px;
 }
 
+.textjalan{
+    body 
+  background-color:#ce3635;
+  text-align: center;
+  color:#fff;
+  padding-top:10em;
+  color:#fff; 
+  text-decoration: none
+}
+
+.var-highlight{
+    color: #C0AD60;
+}
+.string-highlight{
+    color: rgba(253, 149, 90, 0.8);
+}
+
+#typewriter{
+        font-size: 2em;
+        margin: 0;
+        font-family: "Courier New";
+
+        &:after{
+            content: "|";
+            animation: blink 500ms linear infinite alternate;
+        }
+}
+
+@-webkit-keyframes blink{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+@-moz-keyframes blink{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+@keyframes blink{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+
+/*carousel*/
+
 .feature {
   padding: 50px;
 }

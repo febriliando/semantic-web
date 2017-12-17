@@ -49,8 +49,8 @@
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
   </ol>
 
-  <div id="myCarousel" class="carousel slide jumbotron">
-        <div class="container">
+  <div id="myCarousel" class="carousel slide jumbotron ">
+        <div class="container" >
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -59,7 +59,7 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <h1>forum</h1>
-                    <p class="lead">Learn how to build this fun little app by signing up for a Treehouse account today! We'll teach you how to build both apps from scratch!</p>
+                    <p class="lead">Learn how to build this fun little app</p>
                     <p class="btn-group">
                       <a class="btn btn-info btn-lg" href="#">Download the app</a>
                        <a class="btn btn-default btn-lg hidden-xs" data-toggle="modal" href="#textModal">Text me the link</a>
@@ -95,24 +95,23 @@
     </div> <!--End Carousel -->
 
     <!-- content -->
-    <div class="container-fluid">
+    <div class="container-fluid" >
     <div class="row-fluid">
-        <div class="centering text-center">
-            <h3>Hi! I'm centered</h3>
-            <p class="lead">I'm not the author of this snippet, just found it <a>here</a>!</p>
-            <br>
-            <br>
-            <br>
-        </div>
-    </div>
+        <pre id="typewriter">
+        <span class="var-highlight">var</span> object = {
+            name: <span class="string-highlight">'Foo'</span>,
+            type: <span class="string-highlight">'Bar'</span>,
+            location: <span class="string-highlight">'Earth'</span>,
+            properties:[<span class="string-highlight">'Javascript'</span>,
+                        <span class="string-highlight">'HTML'</span>,
+                        <span class="string-highlight">'CSS'</span>];
+            }; </pre>
     </div>
     
-    
+    </div>
     <!-- end content -->
-    
-    
     <!-- footer -->
-    
+    <br><br>
     <footer>
     <div class="footer" id="footer">
         <div class="container">
@@ -196,6 +195,73 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+    function setupTypewriter(t) {
+    var HTML = t.innerHTML;
+    t.innerHTML = "";
+    var cursorPosition = 0,
+        tag = "",
+        writingTag = false,
+        tagOpen = false,
+        typeSpeed = 100,
+    tempTypeSpeed = 0;
+    var type = function() {
+    if (writingTag === true) {
+        tag += HTML[cursorPosition];
+    }
+    if (HTML[cursorPosition] === "<") {
+        tempTypeSpeed = 0;
+        if (tagOpen) {
+            tagOpen = false;
+            writingTag = true;
+        } else {
+            tag = "";
+            tagOpen = true;
+            writingTag = true;
+            tag += HTML[cursorPosition];
+        }
+    }
+    if (!writingTag && tagOpen) {
+        tag.innerHTML += HTML[cursorPosition];
+    }
+    if (!writingTag && !tagOpen) {
+        if (HTML[cursorPosition] === " ") {
+            tempTypeSpeed = 0;
+        }
+        else {
+            tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+        }
+        t.innerHTML += HTML[cursorPosition];
+    }
+    if (writingTag === true && HTML[cursorPosition] === ">") {
+        tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+        writingTag = false;
+        if (tagOpen) {
+            var newSpan = document.createElement("span");
+            t.appendChild(newSpan);
+            newSpan.innerHTML = tag;
+            tag = newSpan.firstChild;
+        }
+    }
+
+    cursorPosition += 1;
+    if (cursorPosition < HTML.length - 1) {
+        setTimeout(type, tempTypeSpeed);
+    }
+
+    };
+
+    return {
+        type: type
+    };
+    }
+
+    var typer = document.getElementById('typewriter');
+
+    typewriter = setupTypewriter(typewriter);
+
+typewriter.type();
     </script>
 </body>
 </html>
